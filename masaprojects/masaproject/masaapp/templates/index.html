@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{# ページタイトルを設定 #}
+{% block title %}ホーム | 在庫管理システム{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <h2 class="mb-4">ようこそ！</h2>
+
+  {# システムの概要説明 #}
+  <p class="lead">
+    このシステムでは、在庫の登録・閲覧・管理、およびお問い合わせが可能です。
+  </p>
+
+  {# ログイン状態によって表示を切り替え #}
+  {% if user.is_authenticated %}
+    <a href="{% url 'inventory' %}" class="btn btn-primary btn-lg mt-3">在庫を確認する</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg mt-3">ログインして始める</a>
+  {% endif %}
+</div>
+{% endblock %}

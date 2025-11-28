@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}お問い合わせ完了{% endblock %}
+
+{% block content %}
+  <div class="text-center">
+    <h2 class="mb-4">お問い合わせありがとうございました</h2>
+    <p class="lead">内容を確認のうえ、担当者よりご連絡いたします。</p>
+    <a href="{% url 'index' %}" class="btn btn-primary mt-3">トップページへ戻る</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{# ページタイトルを設定 #}
+{% block title %}ログイン | 在庫管理システム{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">ログイン</h2>
+
+  {# ログインフォーム（POST送信） #}
+  <form method="post">
+    {% csrf_token %}  {# CSRF対策トークンを挿入 #}
+    {{ form.as_p }}    {# フォームを<p>タグで整形して表示 #}
+
+    {# 送信ボタン #}
+    <button type="submit" class="btn btn-primary">ログイン</button>
+  </form>
+{% endblock %}

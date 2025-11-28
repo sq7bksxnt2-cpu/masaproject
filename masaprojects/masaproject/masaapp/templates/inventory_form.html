@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{# ページタイトルを動的に設定（例：新規登録 | 在庫管理システム） #}
+{% block title %}{{ title }} | 在庫管理システム{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">{{ title }}</h2>
+
+  {# フォーム開始（POST送信） #}
+  <form method="post">
+    {% csrf_token %}  {# CSRF対策トークンを挿入 #}
+    {{ form.as_p }}    {# フォームを<p>タグで自動整形して表示 #}
+
+    {# 送信ボタンと戻るボタン #}
+    <button type="submit" class="btn btn-primary">保存</button>
+    <a href="{% url 'inventory' %}" class="btn btn-secondary">戻る</a>
+  </form>
+{% endblock %}

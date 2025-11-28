@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}在庫一覧 | 在庫管理システム{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">あなたの在庫一覧</h2>
+
+  <!-- 新規登録ボタン -->
+  <a href="{% url 'inventory_add' %}" class="btn btn-success mb-3">新規登録</a>
+
+  <!-- 在庫が存在する場合 -->
+  {% if inventory %}
+    <!-- 在庫合計数の表示 -->
+    <p class="text-muted">登録件数：{{ inventory|length }} 件</p>
+
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">商品名</th>
+          <th scope="col">数量</th>
+          <th scope="col">更新日</th>
+          <th scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in inventory %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.updated_at|date:"Y年m月d日 H:i" }}</td>
+          <td>
+            <a href="{% url 'inventory_edit' item.pk %}" class="btn btn-sm btn-warning me-1">編集</a>
+            <a href="{% url 'inventory_delete' item.pk %}" class="btn btn-sm btn-danger me-1">削除</a>
+            <!-- 履歴ページへのリンク（オプション） -->
+            <a href="{% url 'inventory_history' %}?item={{ item.pk }}" class="btn btn-sm btn-outline-secondary">履歴</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <!-- 在庫がない場合のメッセージ -->
+    <div class="alert alert-info">現在、登録されている在庫はありません。</div>
+  {% endif %}
+{% endblock %}
